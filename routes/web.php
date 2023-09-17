@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AlbumController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +15,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('album.index');
 });
+Route::controller(AlbumController::class)->name('albums.')->prefix('/albums')->group(function () {
+    Route::get('/', 'index')->name('index');
+    Route::get('/create','create')->name('create');
+    Route::post('/','store')->name('store');
+    Route::get('/{album}','show')->name('show');
+    Route::delete('/{album}','destroy')->name('destroy');
+});
+
