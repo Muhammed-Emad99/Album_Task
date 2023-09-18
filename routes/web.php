@@ -20,9 +20,3 @@ Route::get('/', function () {
 Route::patch('/albums/move/{album}',[AlbumController::class,'move'])->name('albums.move');
 Route::resource('albums',AlbumController::class);
 
-//
-//Route::get('/', 'index')->name('index');
-//Route::get('/create','create')->name('create');
-//Route::post('/','store')->name('store');
-//Route::get('/{id}','show')->name('show');
-//Route::delete('/{id}','destroy')->name('destroy');

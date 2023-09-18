@@ -22,8 +22,7 @@ class AlbumController extends Controller
     {
         $data = $request->validated();
         $album = Album::create($data);
-//        dd(count($_FILES['images']['error']));
-        if (isset($_FILES['images']) && count($_FILES['images']['error']) == 0) {
+        if (isset($_FILES['images'])) {
             for ($i = 0; $i < count($request->images); $i++) {
                 $album->images()->create([
                     'name' => upload_image('albums/' . $album->id, $request->images[$i]),
