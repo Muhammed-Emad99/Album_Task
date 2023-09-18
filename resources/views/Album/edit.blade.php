@@ -1,13 +1,13 @@
 @extends('album.album-layout')
 @section('title')
-    Album | Create
+    Album | Edit
 @endsection
 @section('header')
     <div class="container px-4 px-lg-5">
         <div class="">
-            <h1 class="display-4 fw-bolder">Create Album</h1>
+            <h1 class="display-4 fw-bolder">Edit Album</h1>
             <p class="section-lead">
-                On this page you can create a new album and fill in all fields.
+                On this page you can Edit an album.
             </p>
         </div>
     </div>
@@ -15,14 +15,14 @@
 
 @section('content')
     <div class="container px-4 px-lg-5">
-        <form method="post" action="{{route('albums.store')}}" enctype="multipart/form-data" id="uploadForm">
+        <form method="post" action="{{route('albums.update',$album->id)}}" enctype="multipart/form-data" id="uploadForm">
             @csrf
-            @method('post')
+            @method('put')
 
             <!-- Album Name -->
             <div class="form-group mb-5">
                 <label class="mb-3" for="name">Album Name</label>
-                <input type="text" class="form-control" id="name" name="name" value="{{old('name')}}">
+                <input type="text" class="form-control" id="name" name="name" value="{{old('name',$album->name)}}">
                 <div class="text-danger mt-2">
                     @error('name')
                     {{$message}}
@@ -47,7 +47,17 @@
 
                 <!-- gallery view of uploaded images -->
                 <div id="imagesPreview" class="gallery image-container mt-4">
-
+                    @if(count($album->images) > 0)
+                        @foreach($album->images as $index => $image)
+                            <div class='image-child'>
+                                <img src="{{asset('uploads/albums/'.$album->id.'/'.$image->name)}}" alt="alt">
+                            </div>
+                        @endforeach
+                    @else
+                        <div class='text-center'>
+                            This Album has no images
+                        </div>
+                    @endif
                 </div>
 
 

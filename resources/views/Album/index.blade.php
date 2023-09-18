@@ -30,10 +30,15 @@
                         <!-- Product actions-->
                         <div class="d-flex justify-content-between my-2">
                             <div class="text-center"><a class="btn btn-outline-transparent text-info mt-auto"
-                                                        href="{{route('albums.show',['id'=>$album->id])}}"><i
+                                                        href="{{route('albums.edit',['album'=>$album->id])}}"><i
                                         class="fa fa-info-circle me-2"></i>View</a></div>
 
-                            @if(count($album->images) > 0)
+                            <div class="text-center"><a class="btn btn-outline-transparent text-dark mt-auto"
+                                                        href="{{route('albums.edit',['album'=>$album->id])}}"><i
+                                        class="fa fa-pen-to-square me-2"></i>Edit</a></div>
+
+
+                        @if(count($album->images) > 0)
 
                                 <div class="text-center">
                                     <button type="button" class="btn btn-outline-transparent text-secondary mt-auto"
@@ -50,7 +55,7 @@
                                                 <h5 class="modal-title" id="exampleModalLabel"> Move images of this album to another album</h5>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
-                                            <form method="post" action="{{route('albums.move',['id'=>$album->id])}}">
+                                            <form method="post" action="{{route('albums.move',['album'=>$album->id])}}">
                                                 <div class="modal-body">
                                                     @csrf
                                                     @method('patch')
@@ -72,7 +77,7 @@
 
                             @endif
                             <div class="text-center">
-                                <form method="post" action="{{route('albums.destroy',['id'=>$album->id])}}">
+                                <form method="post" action="{{route('albums.destroy',['album'=>$album->id])}}">
                                     @csrf
                                     @method('delete')
                                     <div class="text-center">

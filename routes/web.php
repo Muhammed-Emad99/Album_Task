@@ -17,12 +17,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('album.index');
 });
-Route::controller(AlbumController::class)->name('albums.')->prefix('/albums')->group(function () {
-    Route::get('/', 'index')->name('index');
-    Route::get('/create','create')->name('create');
-    Route::post('/','store')->name('store');
-    Route::get('/{id}','show')->name('show');
-    Route::delete('/{id}','destroy')->name('destroy');
-    Route::patch('/{id}','move')->name('move');
-});
+Route::patch('/albums/move/{album}',[AlbumController::class,'move'])->name('albums.move');
+Route::resource('albums',AlbumController::class);
 
+//
+//Route::get('/', 'index')->name('index');
+//Route::get('/create','create')->name('create');
+//Route::post('/','store')->name('store');
+//Route::get('/{id}','show')->name('show');
+//Route::delete('/{id}','destroy')->name('destroy');
