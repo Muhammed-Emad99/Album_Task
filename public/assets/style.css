@@ -45,7 +45,8 @@
 
 .image-container .image-child{
     width: 24%;
-    height: 24%;
+    height: 220px;
+    display: flex;
 }
 
 .image-container .image-child img{

@@ -15,14 +15,15 @@
 
 @section('content')
     <div class="container px-4 px-lg-5">
-        <form method="post" action="" enctype="multipart/form-data">
+        <form method="post" action="{{route('albums.store')}}" enctype="multipart/form-data" id="uploadForm">
             @csrf
+            @method('post')
 
             <!-- Album Name -->
             <div class="form-group mb-5">
                 <label class="mb-3" for="name">Album Name</label>
-                <input type="text" class="form-control" id="name" aria-describedby="emailHelp" name="name">
-                <div class="invalid-feedback fa-1x">
+                <input type="text" class="form-control" id="name" name="name">
+                <div class="text-danger mt-2">
                     @error('name')
                     {{$message}}
                     @enderror
@@ -35,31 +36,35 @@
                 <div class="w-100">
                     <div class="image-preview">
                         <label for="imageUpload" id="image-label">Choose File</label>
-                        <input type="file" name="image[]" id="imageUpload"/>
+                        <input type="file" name="images[]" id="imageUpload" accept="*/*" multiple >
                     </div>
                 </div>
-                <div class="image-container mt-4">
-
-{{--                    <div class="image-child">--}}
-{{--                        <img src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" id="imagePreview">--}}
-{{--                    </div>--}}
-                </div>
                 <div class="text-danger mt-2">
-                    @error('image')
+                    @error('images')
                     {{$message}}
                     @enderror
                 </div>
+
+                <!-- gallery view of uploaded images -->
+                <div id="imagesPreview" class="gallery image-container mt-4">
+
+                </div>
+
+
             </div>
+
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>
 
-    {{--    <script type="text/javascript">--}}
-    {{--        const dropdown = document.getElementById("status-dropdown");--}}
-
-    {{--        dropdown.addEventListener("change", function () {--}}
-
-    {{--            document.getElementById("myForm").submit();--}}
-    {{--        });--}}
-    {{--    </script>--}}
+    <script type="text/javascript">
+        $("#imageUpload").change(function(){
+            $('#imagesPreview').html("");
+            var total_file=document.getElementById("imageUpload").files.length;
+            for(var i=0;i<total_file;i++)
+            {
+                $('#imagesPreview').append("<div class='image-child'><img src='"+URL.createObjectURL(event.target.files[i])+"'></div>");
+            }
+        });
+    </script>
 @endsection

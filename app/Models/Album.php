@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Album extends Model
 {
     use HasFactory;
+    protected $fillable= ['name'];
+    public function images(){
+        return $this->hasMany(Image::class);
+    }
 }

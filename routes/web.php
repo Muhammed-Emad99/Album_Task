@@ -21,7 +21,8 @@ Route::controller(AlbumController::class)->name('albums.')->prefix('/albums')->g
     Route::get('/', 'index')->name('index');
     Route::get('/create','create')->name('create');
     Route::post('/','store')->name('store');
-    Route::get('/{album}','show')->name('show');
-    Route::delete('/{album}','destroy')->name('destroy');
+    Route::get('/{id}','show')->name('show');
+    Route::delete('/{id}','destroy')->name('destroy');
+    Route::patch('/{id}','move')->name('move');
 });
 
